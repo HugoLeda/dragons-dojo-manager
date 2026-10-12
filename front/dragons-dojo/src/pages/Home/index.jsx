@@ -1,3 +1,4 @@
+import BirthdayCard from "../../components/BirthdayCard";
 import QuickCard from "../../components/QuickCard";
 
 import { Homepage } from "./style";
@@ -29,21 +30,45 @@ const quickCards = [
   }
 ]
 
+const birthdayCards = [
+  {
+    name: "João da Silva",  
+    date: "10/05/2024",
+  },
+  {     
+    name: "Maria Oliveira",   
+    date: "15/05/2024",
+  }
+]
+
 export default function Home() {
   return (
     <Homepage>
       <h1>Olá, sensei!</h1>
       <span>Acesso Rápido</span>
-      <div className="early-acess flex">
-        {quickCards.map((card) => (
-          <QuickCard
-            key={card.title}
-            icon={card.icon}
-            title={card.title}
-            description={card.description}
-          />  
-        ))}
-      </div>
+      <section className="access flex">
+        <div className="early-access flex">
+          {quickCards.map((card) => (
+            <QuickCard
+              key={card.title}
+              icon={card.icon}
+              title={card.title}
+              description={card.description}
+            />  
+          ))}
+        </div>
+
+        <div className="next-birthdays flex">
+          <h1>Próximos Aniversários</h1>
+          {birthdayCards.map((card) => (
+            <BirthdayCard
+              key={card.name}
+              name={card.name}
+              date={card.date}
+            />
+          ))}
+        </div>
+      </section>
     </Homepage>
   )
 }

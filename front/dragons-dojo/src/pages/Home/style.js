@@ -9,7 +9,11 @@ export const Homepage = styled.div `
     display: flex;
   }
 
-  .early-acess {
+  .access {
+    justify-content: space-between;
+  }
+
+  .early-access {
     justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
@@ -17,6 +21,17 @@ export const Homepage = styled.div `
     background-color: ${Theme.colors.gray3};
 
     width: 60%;
+    padding: 16px;
+
+    border-radius: 20px;
+  }
+
+  .next-birthdays {
+    flex-direction: column;
+
+    background-color: ${Theme.colors.gray3};
+
+    width: 35%;
     padding: 16px;
 
     border-radius: 20px;
