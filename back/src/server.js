@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/alunos', require('./routes/alunoRoutes'));
+
 app.get('/', (req, res) => {
   res.json({ mensagem: 'Backend Node.js funcionando!' });
 });
