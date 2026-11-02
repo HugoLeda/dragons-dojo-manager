@@ -2,11 +2,25 @@ import styled from "styled-components";
 import Theme from "../../styles/theme";
 
 export const Homepage = styled.div ` 
-
-  padding: 0 10%;
+  background-color: #efefef;
+  padding: 3rem 10%;
   
   .flex {
     display: flex;
+  }
+
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quick-actions-title {
+    gap: 2rem;
+    span {
+      font-size: ${Theme.textSize.textMd};
+      padding-left: 1rem;
+      margin-bottom: .5rem;
+    }
   }
 
   .access {
@@ -16,18 +30,17 @@ export const Homepage = styled.div `
   .early-access {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 1rem;
 
     background-color: ${Theme.colors.gray3};
 
     width: 60%;
-    padding: 16px;
+    padding: 1rem;
 
     border-radius: 20px;
   }
 
-  .next-birthdays {
-    flex-direction: column;
+  .upcoming-birthdays {
 
     background-color: ${Theme.colors.gray3};
 
@@ -37,12 +50,29 @@ export const Homepage = styled.div `
     border-radius: 20px;
   }
 
+  
+  .upcoming-birthdays-title {
+    align-items: center;
+    gap: .5rem;
+    padding-bottom: 1rem;
+  }
+  
+  .each-birthday {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+
   h1 {
-    font-size: ${Theme.textSize.titleSm};
+    font-size: ${Theme.textSize.titleMobileMd};
     font-weight: 500;
   }
 
+  h2 {
+    font-size: ${Theme.textSize.textLg};
+  }
+
   p {
-    font-size: ${Theme.textSize.textSm};
+    font-size: ${Theme.textSize.textMobileSm};
   }
 `

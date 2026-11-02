@@ -1,17 +1,18 @@
 import BirthdayCard from "../../components/BirthdayCard";
+import Header from "../../components/Header";
 import QuickCard from "../../components/QuickCard";
 
 import { Homepage } from "./style";
 
 import { FaRegFile, FaWallet } from "react-icons/fa";
-import { FaRegUser, FaHandFist } from "react-icons/fa6";
+import { FaRegUser, FaHandFist, FaCakeCandles } from "react-icons/fa6";
 
 
 const quickCards = [
   {
     icon: <FaRegUser style={{fontSize: 24, color: '#2b2b2b'}}/>,
     title: "Meus alunos",
-    description: "Cadastrar e gerenciar matrículas",
+    description: "Cadastrar e gerenciar matrículas"
   },
   {
     icon: <FaWallet style={{fontSize: 24, color: '#2b2b2b'}}/>,
@@ -43,32 +44,43 @@ const birthdayCards = [
 
 export default function Home() {
   return (
-    <Homepage>
-      <h1>Olá, sensei!</h1>
-      <span>Acesso Rápido</span>
-      <section className="access flex">
-        <div className="early-access flex">
-          {quickCards.map((card) => (
-            <QuickCard
-              key={card.title}
-              icon={card.icon}
-              title={card.title}
-              description={card.description}
-            />  
-          ))}
+    <>
+      <Header/>
+      <Homepage>
+        <div className="quick-actions-title flex-column">
+          <h1>Olá, sensei!</h1>
+          <span>Acesso Rápido</span>
         </div>
+        <section className="access flex">
+          <div className="early-access flex">
+            {quickCards.map((card) => (
+              <QuickCard
+                key={card.title}
+                icon={card.icon}
+                title={card.title}
+                description={card.description}
+                link={card.link}
+              />  
+            ))}
+          </div>
 
-        <div className="next-birthdays flex">
-          <h1>Próximos Aniversários</h1>
-          {birthdayCards.map((card) => (
-            <BirthdayCard
-              key={card.name}
-              name={card.name}
-              date={card.date}
-            />
-          ))}
-        </div>
-      </section>
-    </Homepage>
+          <div className="upcoming-birthdays">
+            <div className="upcoming-birthdays-title flex">
+              <FaCakeCandles style={{color: "#E8BB1E"}} />
+              <h2>Próximos aniversários</h2>
+            </div>
+            <div className="each-birthday flex">
+              {birthdayCards.map((card) => (
+                <BirthdayCard
+                  key={card.name}
+                  name={card.name}
+                  date={card.date}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      </Homepage>
+    </>
   )
 }

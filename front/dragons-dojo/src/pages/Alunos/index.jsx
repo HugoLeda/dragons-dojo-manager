@@ -1,7 +1,16 @@
+import { AlunosPage } from "./style";
+
+import Header from "../../components/Header";
+
 export default function Alunos() {
   return (
-    <div>
-      <h1>Alunos</h1>
-    </div>
+    <>
+      <Header/>
+      <AlunosPage>
+        <div>
+          <h1>Meus alunos</h1>
+        </div>
+      </AlunosPage>
+    </>
   );
 }

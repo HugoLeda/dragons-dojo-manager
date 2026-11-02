@@ -5,12 +5,12 @@ const Card = styled.div `
   height: 150px;
   width: calc(50% - 16px);
 
-  padding: 16px;
+  padding: 1rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
+  gap: 1rem;
 
   transition: linear all .2s;
   background-color: ${Theme.colors.matteWhite};
@@ -24,11 +24,11 @@ const Card = styled.div `
     background-color: ${Theme.colors.yellow};
   }
 
-  p {
-      font-size: ${Theme.textSize.textMd};
+  h3 {
+      font-size: ${Theme.textSize.textLg};
   }
 
-  span {
+  p {
     font-size: ${Theme.textSize.textMobileSm};
   }
 `
@@ -38,8 +38,8 @@ export default function QuickCard({icon, title, description}) {
     <Card>
       {icon}
       <div>
-        <p>{title}</p>
-        <span>{description}</span>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     </Card>
   )
