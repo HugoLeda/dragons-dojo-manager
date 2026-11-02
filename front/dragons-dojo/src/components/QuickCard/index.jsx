@@ -1,17 +1,14 @@
 import styled from "styled-components"
 import Theme from "../../styles/theme"
+import { Link } from "react-router-dom"
 
-const Card = styled.div `
+const Card = styled.div`
 
   width: calc(50% - 16px);
-
   gap: 1rem;
-
   transition: linear all .2s;
   background-color: ${Theme.colors.matteWhite};
-
   border-radius: inherit;
-
   user-select: none;
 
   a {
@@ -22,9 +19,7 @@ const Card = styled.div `
     color: ${Theme.colors.gray1};
     text-decoration: none;
     gap: .8rem;
-    
     height: 150px;
-
     padding: 1rem;
   }
 
@@ -33,7 +28,7 @@ const Card = styled.div `
   }
 
   h3 {
-      font-size: ${Theme.textSize.textLg};
+    font-size: ${Theme.textSize.textLg};
   }
 
   p {
@@ -41,16 +36,39 @@ const Card = styled.div `
   }
 `
 
-export default function QuickCard({icon, title, description, link}) {
+export default function QuickCard({
+  icon,
+  title,
+  description,
+  link,
+  onClick
+}) {
+
   return (
     <Card>
-      <a href={link}>
-        {icon}
-        <div>
-          <h3>{title}</h3>
-          <p>{description}</p>
-        </div>
-      </a>
+      {onClick ? (
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onClick();
+          }}
+        >
+          {icon}
+          <div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </div>
+        </a>
+      ) : (
+        <Link to={link}>
+          {icon}
+          <div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </div>
+        </Link>
+      )}
     </Card>
   )
 }

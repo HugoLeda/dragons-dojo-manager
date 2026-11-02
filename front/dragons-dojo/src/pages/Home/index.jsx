@@ -1,12 +1,13 @@
 import BirthdayCard from "../../components/BirthdayCard";
 import Header from "../../components/Header";
 import QuickCard from "../../components/QuickCard";
+import Modal from "../../components/PaymentModal";
 
 import { Homepage } from "./style";
 
 import { FaRegFile, FaWallet } from "react-icons/fa";
 import { FaRegUser, FaHandFist, FaCakeCandles } from "react-icons/fa6";
-
+import { useState } from "react";
 
 const quickCards = [
   {
@@ -31,7 +32,7 @@ const quickCards = [
     icon: <FaRegFile style={{fontSize: 24, color: '#2b2b2b'}}/>,
     title: "Mensalidades",
     description: "Lançar novo pagamento",
-    link:"/"
+    link: "open-payment-modal"
   }
 ]
 
@@ -47,6 +48,10 @@ const birthdayCards = [
 ]
 
 export default function Home() {
+
+  
+const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <Header/>
@@ -64,7 +69,12 @@ export default function Home() {
                 title={card.title}
                 description={card.description}
                 link={card.link}
-              />  
+                onClick={
+                  card.link === "open-payment-modal"
+                    ? () => setIsModalOpen(true)
+                    : undefined
+                }
+              />
             ))}
           </div>
 
@@ -84,6 +94,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+        
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </Homepage>
     </>
   )
