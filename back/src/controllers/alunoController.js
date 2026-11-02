@@ -23,6 +23,14 @@ function escaparRegex(texto) {
   return texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function dataHojeBrasil() {
+  const [ano, mes, dia] = new Date()
+    .toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+    .split('-')
+    .map(Number);
+  return { ano, mes, dia };
+}
+
 // POST /api/alunos
 exports.cadastrar = async (req, res) => {
   try {
@@ -113,5 +121,52 @@ exports.remover = async (req, res) => {
     return res.json({ mensagem: 'Aluno removido com sucesso' });
   } catch (err) {
     return tratarErro(err, res, 'Erro interno ao remover aluno');
+  }
+};
+
+// GET /api/alunos/aniversarios?limite=5
+exports.aniversarios = async (req, res) => {
+  try {
+    const limite = Math.min(Number(req.query.limite) || 5, 50);
+
+    const alunos = await Aluno.find({ status: 'ativo' }).select(
+      'nome dataNascimento'
+    );
+
+    const hoje = dataHojeBrasil();
+    const inicioHoje = Date.UTC(hoje.ano, hoje.mes - 1, hoje.dia);
+
+    const lista = alunos.map((aluno) => {
+      const nasc = aluno.dataNascimento;
+      const mesNasc = nasc.getUTCMonth();
+      const diaNasc = nasc.getUTCDate();
+
+      // Próxima ocorrência: este ano, ou o próximo se já passou
+      // (29/02 em ano não bissexto cai em 01/03 automaticamente)
+      let anoAniversario = hoje.ano;
+      let proximo = Date.UTC(anoAniversario, mesNasc, diaNasc);
+      if (proximo < inicioHoje) {
+        anoAniversario += 1;
+        proximo = Date.UTC(anoAniversario, mesNasc, diaNasc);
+      }
+
+      return {
+        _id: aluno._id,
+        nome: aluno.nome,
+        dataNascimento: nasc,
+        proximoAniversario: new Date(proximo),
+        idade: anoAniversario - nasc.getUTCFullYear(),
+      };
+    });
+
+    lista.sort(
+      (a, b) =>
+        a.proximoAniversario - b.proximoAniversario ||
+        a.nome.localeCompare(b.nome)
+    );
+
+    return res.json(lista.slice(0, limite));
+  } catch (err) {
+    return tratarErro(err, res, 'Erro interno ao buscar aniversários');
   }
 };

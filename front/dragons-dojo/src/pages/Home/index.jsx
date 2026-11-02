@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import api from "../../api/api";
+
 import BirthdayCard from "../../components/BirthdayCard";
 import Header from "../../components/Header";
 import QuickCard from "../../components/QuickCard";
@@ -7,7 +10,6 @@ import { Homepage } from "./style";
 
 import { FaRegFile, FaWallet } from "react-icons/fa";
 import { FaRegUser, FaHandFist, FaCakeCandles } from "react-icons/fa6";
-import { useState } from "react";
 
 const quickCards = [
   {
@@ -36,21 +38,34 @@ const quickCards = [
   }
 ]
 
-const birthdayCards = [
-  {
-    name: "João da Silva",  
-    date: "10/05/2024",
-  },
-  {     
-    name: "Maria Oliveira",   
-    date: "15/05/2024",
-  }
-]
+const formatDate = (iso) =>
+  new Date(iso).toLocaleDateString("pt-BR", { timeZone: "UTC" });
 
 export default function Home() {
-
   
-const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [birthdays, setBirthdays] = useState([]);
+  const [birthdaysLoading, setBirthdaysLoading] = useState(true);
+  const [birthdaysError, setBirthdaysError] = useState(false);
+
+  useEffect(() => {
+    async function loadBirthdays() {
+      try {
+        const { data } = await api.get("/api/alunos/aniversarios", {
+          params: { limite: 5 },
+        });
+        setBirthdays(data);
+      } catch (error) {
+        console.error(error);
+        setBirthdaysError(true);
+      } finally {
+        setBirthdaysLoading(false);
+      }
+    }
+
+    loadBirthdays();
+  }, []);
 
   return (
     <>
@@ -84,11 +99,20 @@ const [isModalOpen, setIsModalOpen] = useState(false);
               <h2>Próximos aniversários</h2>
             </div>
             <div className="each-birthday flex">
-              {birthdayCards.map((card) => (
+              {birthdaysLoading && <p>Carregando...</p>}
+
+              {birthdaysError && <p>Não foi possível carregar os aniversários.</p>}
+
+              {!birthdaysLoading && !birthdaysError && birthdays.length === 0 && (
+                <p>Nenhum aniversário próximo.</p>
+              )}
+
+              {birthdays.map((student) => (
                 <BirthdayCard
-                  key={card.name}
-                  name={card.name}
-                  date={card.date}
+                  key={student._id}
+                  name={student.nome}
+                  date={formatDate(student.proximoAniversario)}
+                  age={student.idade}
                 />
               ))}
             </div>

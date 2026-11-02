@@ -26,14 +26,14 @@ const Card = styled.div `
   }
 `
 
-export default function BirthdayCard({ name, date }) {
+export default function BirthdayCard({ name, date, age }) {
   return (
     <Card>
       <div className="card flex">
         <div className="icon"><FaRegUser/></div>
         <div>
           <p>{name}</p>
-          <span>{date} - X anos</span>
+          <span>{date} - {age} anos</span>
         </div>
       </div>
     </Card>
