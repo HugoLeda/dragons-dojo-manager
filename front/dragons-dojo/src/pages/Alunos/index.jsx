@@ -10,6 +10,10 @@ export default function Alunos() {
         <div>
           <h1>Meus alunos</h1>
         </div>
+        <div className="table flex">
+          <h3>Filtros</h3>
+          <button>Novo</button>
+        </div>
       </AlunosPage>
     </>
   );

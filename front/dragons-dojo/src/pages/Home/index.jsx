@@ -12,22 +12,26 @@ const quickCards = [
   {
     icon: <FaRegUser style={{fontSize: 24, color: '#2b2b2b'}}/>,
     title: "Meus alunos",
-    description: "Cadastrar e gerenciar matrículas"
+    description: "Cadastrar e gerenciar matrículas",
+    link:"/alunos"
   },
   {
     icon: <FaWallet style={{fontSize: 24, color: '#2b2b2b'}}/>,
     title: "Finanças",
     description: "Acompanhar pagamentos",
+    link:"/"
   },
   {
     icon: <FaHandFist style={{fontSize: 24, color: '#2b2b2b'}}/>,
     title: "Modalidades",
     description: "Agenda de aulas e graduações",
+    link:"/"
   },
   {
     icon: <FaRegFile style={{fontSize: 24, color: '#2b2b2b'}}/>,
     title: "Mensalidades",
     description: "Lançar novo pagamento",
+    link:"/"
   }
 ]
 
