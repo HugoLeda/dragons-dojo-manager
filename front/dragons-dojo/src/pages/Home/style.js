@@ -43,7 +43,7 @@ export const Homepage = styled.div `
   .upcoming-birthdays {
 
     background-color: ${Theme.colors.gray3};
-
+    max-height: 350px;
     width: 35%;
     padding: 16px;
 
@@ -60,7 +60,37 @@ export const Homepage = styled.div `
   .each-birthday {
     flex-direction: column;
     gap: 1rem;
+
+    max-height: calc(3 * 82px + 2 * 1rem);
+    overflow-y: auto;
   }
+
+  .each-birthday {
+    overflow-y: auto;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #909090 transparent;
+  }
+
+  /* Chrome, Edge e Safari */
+  .each-birthday::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .each-birthday::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .each-birthday::-webkit-scrollbar-thumb {
+    background-color: #909090;
+    border-radius: 10px;
+  }
+
+  .each-birthday::-webkit-scrollbar-thumb:hover {
+    background-color: ${Theme.colors.yellow};
+  }
+
 
 
   h1 {

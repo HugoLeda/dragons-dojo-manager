@@ -4,7 +4,7 @@ import Theme from "../../styles/theme";
 
 export const HeaderContainer = styled.header`
   background-color: #f9f9f9;
-  padding: 1rem 10%;
+  padding: 1.5rem 10%;
   display: flex;
 
   .flex {
@@ -34,5 +34,9 @@ export const HeaderContainer = styled.header`
 
   span {
     font-size: 12px;
+  }
+
+  .header-links a {
+    color: ${Theme.colors.gray1};
   }
 `
