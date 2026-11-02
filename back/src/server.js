@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/alunos', require('./routes/alunoRoutes'));
+app.use('/api/pagamentos', require('./routes/pagamentoRoutes'));
 
 app.get('/', (req, res) => {
   res.json({ mensagem: 'Backend Node.js funcionando!' });
