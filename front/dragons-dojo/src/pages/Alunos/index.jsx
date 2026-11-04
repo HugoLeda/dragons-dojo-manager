@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AlunosPage } from "./style";
 
@@ -12,6 +13,9 @@ import {
 import { FaMagnifyingGlass, FaPenToSquare, FaPlus } from "react-icons/fa6";
 
 export default function Alunos() {
+
+  const navigate = useNavigate();
+  
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -74,7 +78,10 @@ export default function Alunos() {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <button className="flex"> <FaPlus style={{color: "#fff", fontSize: "12"}}/>Adicionar</button>
+            <button className="flex" onClick={() => navigate("/FichaAluno/novo")}>
+              <FaPlus style={{ color: "#fff", fontSize: "12" }} />
+              Adicionar
+            </button>
           </div>
         </div>
 
