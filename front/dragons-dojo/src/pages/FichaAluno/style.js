@@ -41,7 +41,7 @@ export const FichaAlunoPage = styled.main`
 
   .form-field {
     flex-wrap: wrap;
-    width: 100%;
+    //width: 100%;
     justify-content: space-between;
     gap: 1rem;
   }
@@ -52,7 +52,7 @@ export const FichaAlunoPage = styled.main`
     }
   }
 
-  label {
+  label, span {
     display: flex;
     flex-direction: column;
     gap: .5rem;
@@ -100,6 +100,12 @@ export const FichaAlunoPage = styled.main`
     gap: 1rem;
   }
 
+  #action p {
+    width: 100%;
+    text-align: left;
+    color: ${Theme.colors.red};
+  }
+
   .form-actions button {
     height: 40px;
     padding: .1rem 1rem 0;
@@ -110,6 +116,8 @@ export const FichaAlunoPage = styled.main`
     margin: 0;
     align-items: center;
     gap: .25rem;
+    white-space: nowrap;
+
   }
 
   .form-actions .btn-cancel {    

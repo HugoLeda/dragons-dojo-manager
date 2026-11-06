@@ -71,10 +71,14 @@ export default function FichaAluno({ mode = "view" }) {
             <h1>Cadastro de aluno</h1>
             <fieldset disabled={readOnly} className="flex-column">
               <section id="personal-info" className="form-section flex-column">
-                
                 {/* INFORMAÇÕES PESSOAIS */}
                 <p className="section-title">Informações pessoais</p>
                 <div className="form-field flex">
+                  <label for="foto">
+                    Foto do aluno
+                    <input type="file" id="foto" name="foto" accept="image/*"
+                    />
+                  </label>
                   <label className="fill-name">
                     Nome completo
                     <input type="text"
@@ -92,10 +96,11 @@ export default function FichaAluno({ mode = "view" }) {
                       name="socialName"
                       value={form.socialName || ""}
                       onChange={handleChange}
-                      placeholder="Digite o nome completo..."
+                      placeholder="Digite o nome social (se houver) ..."
                     />
                   </label>
-
+                </div>              
+                <div className="form-field flex">
                   <label>
                     Data de nascimento
                     <input
@@ -123,6 +128,20 @@ export default function FichaAluno({ mode = "view" }) {
                         </label>
                       ))}
                     </div>
+                  </div>
+                  
+                  <div>
+                    <p className="section-title">Redes Sociais</p>
+                    <label className="fill-name">
+                      Instagram
+                      <input
+                        type="text"
+                        name="socialName"
+                        value={form.socialName || ""}
+                        onChange={handleChange}
+                        placeholder="Usuário do instagram..."
+                      />
+                    </label>
                   </div>
                 </div>
               </section>
@@ -243,6 +262,7 @@ export default function FichaAluno({ mode = "view" }) {
               </section>
             </fieldset>
             <div id="action" className="form-actions flex">
+              <p>Campos obrigatórios *</p>
               <button type="button" className="btn-cancel">Cancelar</button>
               {!readOnly && (
                 <button type="submit" className="btn-save">Salvar alterações</button>
