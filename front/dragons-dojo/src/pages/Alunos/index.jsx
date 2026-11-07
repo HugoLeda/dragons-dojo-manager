@@ -106,7 +106,14 @@ export default function Alunos() {
                     <td></td>
                     <td style={{textAlign:"center"}}>{student.createdAt}</td>
                     <td className="flex" style={{gap: ".25rem", textAlign:"center"}}> 
-                      <a href="/alunos" className="flex" style={{alignItems:"center"}}><FaPenToSquare style={{color: "#759dcc"}}/>Editar</a>
+                      <Link
+                        to={`/FichaAluno/${student.id}/editar`}
+                        className="flex"
+                        style={{ alignItems: "center" }}
+                      >
+                        <FaPenToSquare style={{ color: "#759dcc" }} />
+                        Editar
+                      </Link>
                     </td>
                   </tr>
                 ))}
